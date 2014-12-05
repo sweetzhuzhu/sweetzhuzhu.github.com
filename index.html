@@ -1,24 +1,50 @@
-
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=640">
+<meta name="viewport" content="width=320">
 <title>ssss</title>
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 <style type="text/css">
 html,body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,p,th,td { padding: 0; margin: 0; font-family: Arial; font-size: 20px; color: #333;}
 input, select, textarea { font-family: "Microsoft YaHei"; font-size: 20px; color: gray; }
 .clearfix { zoom:1; }
 .clearfix:after {visibility: hidden; display: block; font-size: 0; content: "1"; clear: both; height: 0; }
 .infoList li { width: 50%; line-height: 30px; list-style: none; float: left;}
-.wrap { width: 600px; margin: 0 auto; padding: 20px;}
+.wrap { margin: 0 auto; padding: 20px;}
+.mt10 { margin-top: 10px;}
 .mt20 { margin-top: 20px;}
-.feedback { display: none;}
-.feedback li { list-style: none; padding: 5px 0;}
+.displaynone { display: none;}
+.feedback li, .typeCheck li { list-style: none; padding: 5px 0;}
 .fontweight { font-weight: bold;}
-.feedbackCon textarea { width: 580px; padding: 10px; height: 80px; resize: none;}
-.wrap input { border: 1px solid #0776dF; background-color: #288df0; color: #fff; border-radius: 5px;}
+.feedbackCon textarea { width: 80%; padding: 10px; height: 80px; resize: none;}
+.wrap .btn { border: 1px solid #0776dF; background-color: #288df0; color: #fff; border-radius: 5px;}
+.floatLeft { float: left;}
+.inputBg { border: 1px solid #ccc; height: 24px; line-height: 24px; padding: 0px 5px; background: #fff; border-radius: 5px;}
+.divTable thead tr { background: #f2f2f2; height: 24px; line-height: 23px; font-size: 12px; color: #666; border: 1px #ebebeb solid; text-align: left;}
+.divTable tbody { border: 1px #ebebeb solid;}
+.divTable tbody tr{ border-top: 1px #ebebeb solid; background: #fbfbfb;}
 </style>
+<script type="text/javascript">
+$(function(){
+	$(".typeCheck li input[type='checkbox']").click(function(){
+		if($(this).is(":checked")){
+			$(this).parents("li").find(".input-text").attr("type","text");
+		}else {
+			$(this).parents("li").find(".input-text").attr("type","hidden");
+		}
+	})
+
+	$(".showHistory").click(function(){
+		if($(".history-feedback").css("display") == "none") {
+			$(".history-feedback").show();
+		}else {
+			$(".history-feedback").hide();
+		}
+	})
+})
+</script>
 
 </head>
 
@@ -35,10 +61,150 @@ input, select, textarea { font-family: "Microsoft YaHei"; font-size: 20px; color
 		</ul>
 	</div>
 
-        <div class="infoBtn mt20" align="center">
-                <div><span style="color:red">已确认</span></div>
+    <div class="infoBtn mt20" align="center">
+        <div><span style="color:red">已确认</span></div>
+    </div>
+    
+    <div class="writeType mt20">
+        <div class="fontweight">选择资产信息错误类型</div>
+        <div class="typeCheck mt10">
+            <ul>
+                <li>
+                	<div class="clearfix">
+	                    <span class="floatLeft mr10"><input type="checkbox" /></span>
+	                    <span class="floatLeft mr10">资产标签号-正确信息是</span>
+                    </div>
+                    <p><input type="hidden" class="inputBg w140 input-text" /></p>
+                </li>
+                <li>
+	                <div class="clearfix">
+	                    <span class="floatLeft mr10"><input type="checkbox" /></span>
+	                    <span class="floatLeft mr10">大阿里标签号-正确信息是</span>
+	                </div>
+                    <p><input type="hidden" class="inputBg w140 input-text" /></p>
+                </li>
+                <li>
+	                <div class="clearfix">
+                    	<span class="floatLeft mr10"><input type="checkbox" /></span>
+                    	<span class="floatLeft mr10">资产型号-正确信息是</span>
+                    	<p><input type="hidden" class="inputBg w140 input-text" /></p>
+                    </div>
+                </li>
+                <li>
+	                <div class="clearfix">
+                    	<span class="floatLeft mr10"><input type="checkbox" /></span>
+                    	<span class="floatLeft mr10">资产使用人-正确信息是</span>
+                    	<p><input type="hidden" class="inputBg w140 input-text" /></p>
+                    </div>
+                </li>
+                <li>
+	                <div class="clearfix">
+                    	<span class="floatLeft mr10"><input type="checkbox" /></span>
+                    	<span class="floatLeft mr10">使用说明-正确信息是</span>
+                    	<p><input type="hidden" class="inputBg w140 input-text" /></p>
+                    </div>
+                </li>
+                <li>
+	                <div class="clearfix">
+                    	<span class="floatLeft mr10"><input type="checkbox" /></span>
+                    	<span class="floatLeft mr10">其他的问题</span>
+                    	<p><input type="hidden" class="inputBg w140 input-text" /></p>
+                    </div>
+                </li>
+            </ul>
+            <div class="ui-dialog-btn textcenter">
+                <input type="button" value="提交反馈" class="btn btn-basis mr10 confirmreply">
+                <input type="button" value="历史反馈" class="btn showHistory">
+            </div>
         </div>
+    </div>
+    <div class="history-feedback mt20 displaynone">
+        <div class="divTable">
+            <table width="100%">
+                <thead>
+                <tr>
+                    <th width="50%">资产标签</th>
+                    <th width="50%">反馈内容</th>
+                </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+        <div class="divTable mt10">
+            <table width="100%">
+                <thead>
+                <tr>
+                    <th width="50%">大阿里标签号</th>
+                    <th width="50%">反馈内容</th>
+                </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+        <div class="divTable mt10">
+            <table width="100%">
+                <thead>
+                <tr>
+                    <th width="50%">型号</th>
+                    <th width="50%">反馈内容</th>
+                </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+        <div class="divTable mt10">
+            <table width="100%">
+                <thead>
+                <tr>
+                    <th width="50%">资产使用人</th>
+                    <th width="50%">反馈内容</th>
+                </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+        <div class="divTable mt10">
+            <table width="100%">
+                <thead>
+                <tr>
+                    <th width="50%">其他说明</th>
+                    <th width="50%">反馈内容</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>自用-日常办公</td>
+                    <td>自用-合理多机</td>
+                </tr>
+                <tr>
+                    <td>自用-日常办公</td>
+                    <td>自用-合理多机</td>
+                </tr>
+                <tr>
+                    <td>自用-日常办公</td>
+                    <td>自用-合理多机</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="divTable mt10">
+            <table width="100%">
+                <thead>
+                <tr>
+                    <th width="50%">其他的问题</th>
+                    <th width="50%">反馈内容</th>
+                </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
 </body>
 </html>
-
+</html>
