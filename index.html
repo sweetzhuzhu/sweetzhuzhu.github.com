@@ -31,8 +31,10 @@ $(function(){
 	$(".typeCheck li input[type='checkbox']").click(function(){
 		if($(this).is(":checked")){
 			$(this).parents("li").find(".input-text").attr("type","text");
+			$(this).parents("li").find(".input-text").show();
 		}else {
 			$(this).parents("li").find(".input-text").attr("type","hidden");
+			$(this).parents("li").find(".input-text").hide();
 		}
 	})
 
@@ -101,7 +103,12 @@ $(function(){
 	                <div class="clearfix">
                     	<span class="floatLeft mr10"><input type="checkbox" /></span>
                     	<span class="floatLeft mr10">使用说明-正确信息是</span>
-                    	<p><input type="hidden" class="inputBg w140 input-text" /></p>
+                    	<p class="input-text displaynone">
+							<select>
+								<option value="">自用-合理多机</option>
+								<option value="">自用-借用</option>
+							</select>
+                    	</p>
                     </div>
                 </li>
                 <li>
